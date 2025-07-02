@@ -1,0 +1,49 @@
+---
+- name: Install Apache, Nginx, vsftpd on Ubuntu and Red Hat
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Set OS flags
+      set_fact:
+        is_ubuntu: "{{ ansible_distribution == 'Ubuntu' }}"
+        is_redhat: "{{ ansible_os_family == 'RedHat' }}"
+
+    - name: Install packages on Ubuntu
+      apt:
+        name: "{{ item }}"
+        state: present
+        update_cache: yes
+      loop:
+        - apache2
+        - nginx
+        - vsftpd
+      when: is_ubuntu
+
+    - name: Install packages on Red Hat
+      yum:
+        name: "{{ item }}"
+        state: present
+      loop:
+        - httpd
+        - nginx
+        - vsftpd
+      when: is_redhat
+
+    - name: Enable and start Apache
+      service:
+        name: "{{ 'apache2' if is_ubuntu else 'httpd' }}"
+        state: started
+        enabled: yes
+
+    - name: Enable and start Nginx
+      service:
+        name: nginx
+        state: started
+        enabled: yes
+
+    - name: Enable and start vsftpd
+      service:
+        name: vsftpd
+        state: started
+        enabled: yes
