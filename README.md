@@ -17,13 +17,13 @@ multi-os-ansible-setup/
 
 **📦 playbook.yml Tasks Overview**
 
-✅ Detect OS (Ubuntu or RedHat)
+> ✅ Detect OS (Ubuntu or RedHat)
 
-📦 Install appropriate packages based on OS
+> 📦 Install appropriate packages based on OS
 
-⚠️ Stop Apache before starting Nginx to avoid port conflict
+> ⚠️ Stop Apache before starting Nginx to avoid port conflict
 
-🔁 Enable and start Nginx and vsftpd services
+> 🔁 Enable and start Nginx and vsftpd services
 
 **🚀 How to Run**
 
@@ -35,6 +35,7 @@ multi-os-ansible-setup/
 
   > git clone https://github.com/your-username/multi-os-ansible-setup.git
   > cd multi-os-ansible-setup
+
 **3. Update Inventory File**
 
   > Replace IPs with your actual EC2 instance IPs in inventory.ini.
